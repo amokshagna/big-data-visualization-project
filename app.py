@@ -128,6 +128,20 @@ def monitor() -> None:
     trend.update_layout(height=390, hovermode="x unified", legend_title_text="")
     st.plotly_chart(trend, use_container_width=True)
 
+    aqi_timeline = px.line(
+        city_history,
+        x="observed_at",
+        y="us_aqi",
+        markers=True,
+        title="US AQI timeline",
+        labels={"observed_at": "Observation time", "us_aqi": "US AQI"},
+        color_discrete_sequence=["#dc2626"],
+    )
+    aqi_timeline.update_layout(height=320, hovermode="x unified")
+    aqi_timeline.add_hline(y=50, line_dash="dot", line_color="#16a34a", annotation_text="Good limit")
+    aqi_timeline.add_hline(y=100, line_dash="dot", line_color="#ca8a04", annotation_text="Moderate limit")
+    st.plotly_chart(aqi_timeline, use_container_width=True)
+
     heatmap_data = city_history.assign(
         hour=city_history["observed_at"].dt.hour,
         day=city_history["observed_at"].dt.day_name().str.slice(stop=3),
