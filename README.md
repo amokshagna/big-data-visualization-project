@@ -1,7 +1,5 @@
 # BDV — Live Air-Quality Monitor
 
-This is a **separate project** from `BIa`. It does not modify or depend on the
-original BIA dashboard.
 
 BDV polls the free Open-Meteo Air Quality API every 15 minutes and plots recent
 air-quality readings for a selected city. It uses API polling rather than
